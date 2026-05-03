@@ -12,7 +12,7 @@ load_dotenv(BASE_DIR / ".env")
 OLLAMA_TIMEOUT: int = int(os.getenv("OLLAMA_TIMEOUT", "600"))
 
 # Ollama base URL. In Docker Compose, set this to http://ollama:11434.
-OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434").rstrip("/")
+OLLAMA_BASE_URL: str = os.getenv("OLLAMA_BASE_URL", "http://localhost:11435").rstrip("/")
 
 # LLM provider selection: 'ollama' (default) or 'openai'.
 LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "ollama")
