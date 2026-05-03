@@ -47,7 +47,7 @@ Patterns used:
 ## Prerequisites
 
 - Python 3.10+ (3.12 recommended)
-- Ollama running locally on host (`http://localhost:11434`)
+- Ollama installed and running on your local machine (`http://localhost:11434`)
 
 ## Environment Configuration
 
@@ -67,6 +67,39 @@ Notes:
 
 - For local host-run setup, use `OLLAMA_BASE_URL=http://localhost:11434`
 
+## Local Ollama Setup
+
+Install Ollama on your local machine:
+
+- Linux:
+
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+
+- macOS: install from the Ollama website and launch the app once.
+- Windows: install from the Ollama website and launch the app once.
+
+Start Ollama service:
+
+```bash
+ollama serve
+```
+
+Pull required model:
+
+```bash
+ollama pull llama3.2
+```
+
+Verify local Ollama is reachable:
+
+```bash
+curl -s http://localhost:11434/api/tags
+```
+
+If your local Ollama runs on a non-default port, update `.env` with your port in `OLLAMA_BASE_URL`.
+
 ## Setup and Run (Host)
 
 ### 1) Create virtual environment and install dependencies
@@ -83,6 +116,12 @@ pip install -r requirements.txt
 ```bash
 ollama serve
 ollama pull llama3.2
+```
+
+Quick check:
+
+```bash
+curl -s http://localhost:11434/api/tags
 ```
 
 ### 3) Start API server
@@ -222,6 +261,7 @@ Fix:
 
 - Start Ollama and ensure your model is available.
 - Verify `.env` contains `OLLAMA_BASE_URL=http://localhost:11434`.
+- Verify local Ollama responds to `curl -s http://localhost:11434/api/tags`.
 
 ### Error: HTTP 404 from /api/chat (model not found)
 
