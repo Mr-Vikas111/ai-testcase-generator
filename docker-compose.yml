@@ -1,0 +1,32 @@
+services:
+  api:
+    image: ${API_IMAGE:-yourdockerhubusername/ai-test-api:latest}
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ai-test-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      LLM_PROVIDER: ${LLM_PROVIDER:-ollama}
+      MODEL_OLLAMA: ${MODEL_OLLAMA:-llama3.2}
+      OLLAMA_TIMEOUT: ${OLLAMA_TIMEOUT:-600}
+    ports:
+      - "5055:5055"
+    volumes:
+      - ./storage:/app/storage
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:
