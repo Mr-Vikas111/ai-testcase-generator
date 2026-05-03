@@ -54,9 +54,11 @@ class LLMAdapter(abc.ABC):
 class OllamaAdapter(LLMAdapter):
     """Adapter for a locally running Ollama inference server."""
 
-    _BASE_URL: str = "http://localhost:11434"
     _RETRIES: int = 3
     _BACKOFF: float = 5.0
+
+    def __init__(self, base_url: str | None = None) -> None:
+        self._base_url = (base_url or config.OLLAMA_BASE_URL).rstrip("/")
 
     def chat(
         self,
@@ -82,7 +84,7 @@ class OllamaAdapter(LLMAdapter):
 
         for attempt in range(1, self._RETRIES + 1):
             req = urllib.request.Request(
-                f"{self._BASE_URL}/api/chat",
+                f"{self._base_url}/api/chat",
                 data=body,
                 headers={"Content-Type": "application/json"},
                 method="POST",
@@ -106,7 +108,7 @@ class OllamaAdapter(LLMAdapter):
                     continue
                 log.error("OllamaAdapter.chat — connection error: %s", exc)
                 raise ConnectionError(
-                    f"Cannot reach Ollama at {self._BASE_URL}: {exc}"
+                    f"Cannot reach Ollama at {self._base_url}: {exc}"
                 ) from exc
 
         log.error(

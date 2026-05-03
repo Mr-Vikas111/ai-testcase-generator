@@ -12,6 +12,7 @@ services:
       LLM_PROVIDER: ${LLM_PROVIDER:-ollama}
       MODEL_OLLAMA: ${MODEL_OLLAMA:-llama3.2}
       OLLAMA_TIMEOUT: ${OLLAMA_TIMEOUT:-600}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://ollama:11434}
     ports:
       - "5055:5055"
     volumes:

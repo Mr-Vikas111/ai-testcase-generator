@@ -17,7 +17,7 @@ from app.core import config, sanitize
 BASE_DIR = Path(__file__).resolve().parents[2]
 load_dotenv(BASE_DIR / ".env")
 
-OLLAMA_BASE_URL = "http://localhost:11434"
+OLLAMA_BASE_URL = config.OLLAMA_BASE_URL
 OLLAMA_MODEL = os.getenv("MODEL_OLLAMA", "llama3.2")
 
 _SYSTEM = """\

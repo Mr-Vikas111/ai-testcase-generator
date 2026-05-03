@@ -10,6 +10,7 @@ COPY requirements.txt ./
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 COPY app ./app
+COPY .github ./.github
 COPY webhook_server.py ./
 COPY run_app.sh ./
 
