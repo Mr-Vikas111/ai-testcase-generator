@@ -300,12 +300,6 @@ Syntax compile check:
 python -m compileall app webhook_server.py
 ```
 
-Project-specific environment path example:
-
-```bash
-/home/a/techind/projects/nubo-backend/env/bin/python -m compileall app webhook_server.py
-```
-
 ## Security Notes
 
 - Sensitive headers and payload secrets are redacted before storage/processing.
